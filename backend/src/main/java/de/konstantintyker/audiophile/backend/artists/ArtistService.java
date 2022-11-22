@@ -20,7 +20,7 @@ public class ArtistService {
 
     public Artist addArtistDate(NewArtist newArtist) {
         String uuid = this.artistUtils.generateUUID();
-        Artist artist = new Artist(newArtist.firstName(),newArtist.lastName(),uuid);
+        Artist artist = new Artist(uuid,newArtist.firstName(),newArtist.lastName());
         return this.artistRepo.save(artist);
     }
 }
