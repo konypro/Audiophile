@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {HashRouter, Route, Routes,} from "react-router-dom"
+import ArtistAdminAdd from "./Artist/ArtistModel/ArtistAdminAdd";
+import ArtistAdminGet from "./Artist/ArtistModel/ArtistAdminGet";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+
+  return <>
+
+    <header>
+      <h1>Audiophile</h1>
+    </header>
+    <HashRouter>
+      <Routes>
+        <Route path="/ArtistAdminAdd" element={<ArtistAdminAdd/>}/>
+        <Route path="/ArtistAdminGet" element={<ArtistAdminGet/>}/>
+
+
+      </Routes>
+    </HashRouter>
+
+
+  </>
 }
 
-export default App;
