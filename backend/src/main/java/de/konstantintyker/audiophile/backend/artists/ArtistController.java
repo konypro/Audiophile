@@ -1,8 +1,9 @@
 package de.konstantintyker.audiophile.backend.artists;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,10 +16,6 @@ public class ArtistController {
         this.artistService = artistService;
     }
 
-    @PostMapping
-    Artist addArtist(@RequestBody @Valid NewArtist artist){
-        return artistService.addArtistDate(artist);
-    }
     @GetMapping
     List<Artist> getArtistList(){
         return artistService.getArtistList();
