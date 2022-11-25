@@ -3,4 +3,3 @@ export type ArtistModel = {
     lastName: string;
     id: string;
 }
-// export default ArtistModel;

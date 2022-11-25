@@ -3,11 +3,11 @@ import axios from "axios";
 import {ArtistModel} from "./ArtistModel";
 import styled from "styled-components";
 
-export default function ArtistAdminGet() {
+export default function AllArtists() {
     const [artistList, setArtistList] = useState<ArtistModel[]>();
 
     const getArtist = () => {
-        axios.get("/api/artist")
+        axios.get("/api/artists")
             .then((response) => {
                 return response.data
             })
@@ -22,14 +22,14 @@ export default function ArtistAdminGet() {
 
     return (
         <StyledSection>
-            <h2>Arists:</h2>
+            <h2>Artists:</h2>
 
             <StyledUl>
                 {artistList
-                    ?.map((artist) => <>
+                    ?.map((artist) => <li>
                         <p> {artist.firstName}  </p>
                         <p> {artist.lastName}  </p>
-                    </>)
+                    </li>)
 
                 }
             </StyledUl>
