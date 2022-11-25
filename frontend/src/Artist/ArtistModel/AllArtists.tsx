@@ -22,15 +22,16 @@ export default function AllArtists() {
 
     return (
         <StyledSection>
-            <h2>Artists:</h2>
+            <h2>Artists List:</h2>
 
             <StyledUl>
                 {artistList
-                    ?.map((artist) => <li>
-                        <p> {artist.firstName}  </p>
-                        <p> {artist.lastName}  </p>
-                    </li>)
-
+                    ?.map((artist) =>
+                        <ul key={artist.id}>
+                            <li>{artist.firstName}</li>
+                            {artist.lastName}
+                        </ul>
+                    )
                 }
             </StyledUl>
         </StyledSection>
@@ -38,17 +39,17 @@ export default function AllArtists() {
 }
 
 const StyledSection = styled.section`
-  display: flex;
+  display: flex-direction: column ;
   flex-direction: column;
   margin: 10px;
   padding: 8px 20px 25px 20px;
-  border: 1px solid rgba(10 10 10 0.3);
+  border: 5px solid rgba(10 10 10 0.3);
   border-radius: 1pc;
   box-shadow: 0 .0625rem .5rem 0 rgba(0, 0, 0, .4), 0 .0625rem .3125rem 0 rgba(0, 0, 0, .4);
 `
 const StyledUl = styled.ul`
   padding: 0;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: left;
+  flex-wrap: nowrap;
 `
