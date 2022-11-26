@@ -7,7 +7,7 @@ export default function App() {
 
   return <>
     <header>
-      <h1>Audiophile</h1>
+      <h1>AUDIOphile</h1>
     </header>
     <HashRouter>
       <Routes>
