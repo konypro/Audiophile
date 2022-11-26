@@ -14,8 +14,9 @@
 }
 
 h2 {
+    padding: 15px 32px;
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 h1 {
@@ -23,5 +24,28 @@ h1 {
     text-align: center;
 }
 
+ul {
+    padding: 0.5rem;
+    margin: 0 auto;
+}
 
+button {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+body {
+    background: rgb(238, 174, 202);
+    background: linear-gradient(90deg, rgba(238, 174, 202, 1) 0%, rgba(8, 0, 73, 1) 100%);
+}
 
