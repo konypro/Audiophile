@@ -18,8 +18,8 @@ public class ArtistService {
 
     public Artist addNewArtist(NewArtist newArtist) {
         String newUUID = ArtistUtils.generateUUID();
-        Artist artist = new Artist(newArtist.firstName(), newArtist.lastName(), newUUID);
-        return artistRepo.save(artist);
-
+        Artist artist = new Artist(newUUID, newArtist.firstName(), newArtist.lastName());
+        return this.artistRepo.save(artist);
     }
+
 }
