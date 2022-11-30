@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {ArtistModel} from "./ArtistModel";
+import AddArtistForm from "../AddArtistForm";
+import ArtistCard from "./ArtistCard";
 
 export default function AllArtists() {
     const [artistList, setArtistList] = useState<ArtistModel[]>();
 
-    const getArtist = () => {
+    const getArtists = () => {
         axios.get("/api/artists")
             .then((response) => {
                 return response.data
@@ -16,26 +18,25 @@ export default function AllArtists() {
             .then(data => setArtistList(data))
     }
     useEffect(() => {
-        getArtist();
+        getArtists();
     }, [])
 
     return (
-        <body>
         <div>
-            <h2>Artists List:</h2>
+            <AddArtistForm fetchAll={getArtists}/>
+            <div>
+                <h2>Artists List:</h2>
 
-            <menu>
-                {artistList
-                    ?.map((artist) =>
-                        <button className={artist.id}>
-                            <p>{artist.firstName}</p>
-                            <p>{artist.lastName}</p>
-                        </button>
-                    )
-                }
-            </menu>
+                <menu>
+                    {artistList
+                        ?.map((artist) =>
+                            <ArtistCard artistCard={artist} key={artist.id}/>
+                        )
+                    }
+                </menu>
+            </div>
         </div>
-        </body>
+
     )
 }
 
