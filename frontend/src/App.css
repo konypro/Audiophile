@@ -2,16 +2,7 @@
 .App {
     text-align: center;
 }
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
+
 
 h2 {
     padding: 15px 32px;
@@ -29,6 +20,13 @@ ul {
     margin: 0 auto;
 }
 
+
+body {
+    background: rgb(238, 174, 202);
+    background: linear-gradient(90deg, rgba(238, 174, 202, 1) 0%, rgba(8, 0, 73, 1) 100%);
+    padding: 0 60px;
+}
+
 button {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: none;
@@ -44,8 +42,19 @@ button {
     transition-duration: 0.4s;
 }
 
-body {
-    background: rgb(238, 174, 202);
-    background: linear-gradient(90deg, rgba(238, 174, 202, 1) 0%, rgba(8, 0, 73, 1) 100%);
+
+.list {
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 2fr 1fr;
+    flex-flow: wrap;
+    gap: 10px 15%;
+    column-gap: 32px;
+    justify-content: center;
+    align-items: flex-start;
+    border: darkblue;
+
 }
 
