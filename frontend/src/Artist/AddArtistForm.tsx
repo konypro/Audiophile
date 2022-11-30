@@ -1,5 +1,8 @@
 import {useState} from "react";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 type AddArtistForm = {
     fetchAll: () => void;
@@ -16,19 +19,21 @@ export default function AddArtistForm(props: AddArtistForm) {
             lastName: lastName
         })
             .catch((error) => console.log("POST Error: " + error))
+            .then(props.fetchAll)
 
     }
     return (
         <div id={"name"}>
-            <div>
-                <p>First Name:</p>
-                <input type={"text"} onChange={(event) => setfirstName(event.target.value)} placeholder={"Ozzy"}/>
-            </div>
-            <div>
-                <p>Last Name:</p>
-                <input type={"text"} onChange={(event) => setLastName(event.target.value)} placeholder={"Osbourne"}/>
-            </div>
-            <button type={"submit"} onClick={addNewArtist}>SAVE</button>
+
+            <InputGroup className="mb-3">
+                <InputGroup.Text>First and Last Name</InputGroup.Text>
+                <Form.Control type={"text"} onChange={(event) => setfirstName(event.target.value)}
+                              placeholder={"Ozzy"}/>
+                <Form.Control type={"text"} onChange={(event) => setLastName(event.target.value)}
+                              placeholder={"Osbourne"}/>
+            </InputGroup>
+            <Button size="lg" variant="light" type={"submit"} onClick={addNewArtist}>Save</Button>
+
 
         </div>)
 
