@@ -26,17 +26,15 @@ export default function AllArtists() {
             <AddArtistForm fetchAll={getArtists}/>
             <div>
                 <h2>Artists List:</h2>
-
-                <menu>
-                    {artistList
-                        ?.map((artist) =>
-                            <ArtistCard artistCard={artist} key={artist.id}/>
-                        )
-                    }
-                </menu>
+            </div>
+            <div className="list">
+                {artistList
+                    ?.map((artist) =>
+                        <ArtistCard artistCard={artist} key={artist.id}/>
+                    )
+                }
             </div>
         </div>
-
     )
 }
 
