@@ -22,4 +22,7 @@ public class ArtistService {
         return this.artistRepo.save(artist);
     }
 
+    public boolean isArtistExist(String id) {
+        return artistRepo.existsById(id);
+    }
 }

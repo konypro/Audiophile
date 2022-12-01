@@ -1,5 +1,7 @@
 package de.konstantintyker.audiophile.backend.artists;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,6 +25,18 @@ public class ArtistController {
     @PostMapping
     public Artist addNewArtist(@Valid @RequestBody NewArtist artist) {
         return artistService.addNewArtist(artist);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Artist> updateArtist(@PathVariable String id, @Valid @RequestBody Artist artist) {
+        boolean artistExist = artistService.isArtistExist(id);
+
+        Artist artistToUpdate = artist.id(id)
+        Artist updateArtist = artistService.addNewArtist(artistToUpdate);
+
+        return artistExist ?
+                new ResponseEntity<>(updateArtist, HttpStatus.OK) :
+                new ResponseEntity<>(updateArtist, HttpStatus.CREATED);
     }
 
 
