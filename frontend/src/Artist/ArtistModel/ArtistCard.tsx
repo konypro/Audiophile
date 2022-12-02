@@ -1,12 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
-import React from 'react';
+import React, {useState} from 'react';
 import {ArtistModel} from "./ArtistModel";
+import UpdateForm from "./UpdateForm";
 
-type props = { artistCard: ArtistModel }
+type props = { artistCard: ArtistModel, fetchAll: () => void }
+
 
 function ArtistCard(props: props) {
+    const [edit, setEdit] = useState<boolean>(false)
     return (
         <Card border="dark" style={{width: '18rem'}}>
             <Card.Header>
@@ -24,8 +27,8 @@ function ArtistCard(props: props) {
             </Card.Header>
             <Card.Body>
                 <Card.Title>{props.artistCard.firstName + " " + props.artistCard.lastName}</Card.Title>
-
-                <Button variant="light">Delete</Button>
+                {edit && <UpdateForm artist={props.artistCard} fetchAll={props.fetchAll}/>}
+                <Button onClick={() => setEdit(!edit)} variant="light">Edit</Button>
             </Card.Body>
         </Card>
         // <p>{props.artistCard.firstName}</p>
