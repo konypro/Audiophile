@@ -5,12 +5,12 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import {ArtistModel} from "./ArtistModel";
 
-type AddArtistFormProps = {
+type UpdateFormProps = {
     artist: ArtistModel,
     fetchAll: () => void
 }
 
-export default function AddArtistForm(props: AddArtistFormProps) {
+export default function UpdateForm(props: UpdateFormProps) {
     const [firstName, setfirstName] = useState<String>(props.artist.firstName)
     const [lastName, setlastName] = useState<String>(props.artist.lastName)
 
