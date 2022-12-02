@@ -1,5 +1,7 @@
 package de.konstantintyker.audiophile.backend.artist;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.konstantintyker.audiophile.backend.artists.Artist;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,12 +37,30 @@ class ArtistIntegrationTest {
         mvc.perform(MockMvcRequestBuilders.post("/api/artists")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {
-                                        "firstName": "Elton",
-                                        "lastName": "John"     
-                                }
+                                {    "firstName": "Elton","lastName": "John" }
                                 """))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DirtiesContext
+    void deleteTravelerByIdIsSuccessful() throws Exception {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String body = mvc.perform(MockMvcRequestBuilders.post("/api/artists")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"firstName": "Elton","lastName": "John"}
+                                """))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString();
+
+        Artist artist = objectMapper.readValue(body, Artist.class);
+
+        mvc
+                .perform(MockMvcRequestBuilders.delete("/api/artists/" + artist.id()))
+                .andExpect(status().isNoContent());
     }
 }
 
