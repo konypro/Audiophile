@@ -40,5 +40,15 @@ public class ArtistController {
         }
     }
 
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @DeleteMapping("{id}")
+    public void deleteArtist(@PathVariable String id) {
+        try {
+            artistService.deleteArtist(id);
+        } catch (NoSuchElementException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }

@@ -29,4 +29,11 @@ public class ArtistService {
         }
         return artistRepo.save(artist);
     }
+
+    public void deleteArtist(String id) {
+        if (!artistRepo.existsById(id)) {
+            throw new NoSuchElementException("No such element exception with this id");
+        }
+        artistRepo.deleteById(id);
+    }
 }
