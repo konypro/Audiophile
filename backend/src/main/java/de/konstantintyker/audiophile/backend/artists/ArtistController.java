@@ -1,11 +1,12 @@
 package de.konstantintyker.audiophile.backend.artists;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/artists")
@@ -23,20 +24,20 @@ public class ArtistController {
     }
 
     @PostMapping
-    public Artist addNewArtist(@Valid @RequestBody NewArtist artist) {
+    public Artist addNewArtist(@Valid @RequestBody Artist artist) {
         return artistService.addNewArtist(artist);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Artist> updateArtist(@PathVariable String id, @Valid @RequestBody Artist artist) {
-        boolean artistExist = artistService.isArtistExist(id);
-
-        Artist artistToUpdate = artist.id(id)
-        Artist updateArtist = artistService.addNewArtist(artistToUpdate);
-
-        return artistExist ?
-                new ResponseEntity<>(updateArtist, HttpStatus.OK) :
-                new ResponseEntity<>(updateArtist, HttpStatus.CREATED);
+    public Artist updateArtist(@PathVariable String id, @RequestBody Artist artist) {
+        try {
+            if (artist.id().equals(id)) {
+                return artistService.updateArtistById(id, artist);
+            }
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } catch (NoSuchElementException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
 
