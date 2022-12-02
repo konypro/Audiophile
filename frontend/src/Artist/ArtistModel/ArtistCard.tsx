@@ -20,9 +20,6 @@ function ArtistCard(props: props) {
                     <Nav.Item>
                         <Nav.Link href="#link">Link</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-1">PlayList</Nav.Link>
-                    </Nav.Item>
                 </Nav>
             </Card.Header>
             <Card.Body>
