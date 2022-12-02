@@ -30,7 +30,7 @@ export default function AllArtists() {
             <div className="list">
                 {artistList
                     ?.map((artist) =>
-                        <ArtistCard artistCard={artist} key={artist.id}/>
+                        <ArtistCard artistCard={artist} fetchAll={getArtists} key={artist.id}/>
                     )
                 }
             </div>
