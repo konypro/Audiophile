@@ -3,6 +3,7 @@ package de.konstantintyker.audiophile.backend.artists;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ArtistService {
@@ -16,13 +17,16 @@ public class ArtistService {
         this.artistRepo = artistRepo;
     }
 
-    public Artist addNewArtist(NewArtist newArtist) {
+    public Artist addNewArtist(Artist newArtist) {
         String newUUID = ArtistUtils.generateUUID();
         Artist artist = new Artist(newUUID, newArtist.firstName(), newArtist.lastName());
         return this.artistRepo.save(artist);
     }
 
-    public boolean isArtistExist(String id) {
-        return artistRepo.existsById(id);
+    public Artist updateArtistById(String id, Artist artist) {
+        if (!artistRepo.existsById(id)) {
+            throw new NoSuchElementException("No Artist was found with this id");
+        }
+        return artistRepo.save(artist);
     }
 }
