@@ -20,6 +20,7 @@ function ArtistCard(props: props) {
     return (
         <Card border="dark" style={{width: '18rem'}}>
             <Card.Header>
+
                 <Nav variant="tabs" defaultActiveKey="#first">
                     <Nav.Item>
                         <Nav.Link href="#first">Artist</Nav.Link>
@@ -28,17 +29,18 @@ function ArtistCard(props: props) {
                         <Nav.Link href="#link">Link</Nav.Link>
                     </Nav.Item>
                 </Nav>
+
             </Card.Header>
+
             <Card.Body>
                 <Card.Title>{props.artistCard.firstName + " " + props.artistCard.lastName}</Card.Title>
-                if () {edit && <UpdateForm artist={props.artistCard} fetchAll={props.fetchAll}/>}
+                {edit && <UpdateForm artist={props.artistCard} fetchAll={props.fetchAll}/>}
                 <Button onClick={() => setEdit(!edit)} variant="light">Edit</Button>
                 <Button onClick={deleteArtist} variant="light">Delete card</Button>
             </Card.Body>
+
         </Card>
-        // <p>{props.artistCard.firstName}</p>
-        //<p>{props.artistCard.lastName}</p>
-        //</div>
+
     );
 }
 
