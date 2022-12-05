@@ -4,12 +4,19 @@ import Nav from 'react-bootstrap/Nav';
 import React, {useState} from 'react';
 import {ArtistModel} from "./ArtistModel";
 import UpdateForm from "./UpdateForm";
+import axios from "axios";
 
 type props = { artistCard: ArtistModel, fetchAll: () => void }
 
 
 function ArtistCard(props: props) {
     const [edit, setEdit] = useState<boolean>(false)
+    const deleteArtist = () => {
+        axios.delete("/api/artists/" + props.artistCard.id)
+            .catch((error) => console.log("POST Error: " + error))
+            .then(props.fetchAll)
+
+    }
     return (
         <Card border="dark" style={{width: '18rem'}}>
             <Card.Header>
@@ -24,8 +31,9 @@ function ArtistCard(props: props) {
             </Card.Header>
             <Card.Body>
                 <Card.Title>{props.artistCard.firstName + " " + props.artistCard.lastName}</Card.Title>
-                {edit && <UpdateForm artist={props.artistCard} fetchAll={props.fetchAll}/>}
+                if () {edit && <UpdateForm artist={props.artistCard} fetchAll={props.fetchAll}/>}
                 <Button onClick={() => setEdit(!edit)} variant="light">Edit</Button>
+                <Button onClick={deleteArtist} variant="light">Delete card</Button>
             </Card.Body>
         </Card>
         // <p>{props.artistCard.firstName}</p>
