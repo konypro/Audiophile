@@ -35,7 +35,8 @@ function ArtistCard(props: props) {
             <Card.Body>
                 <Card.Title>{props.artistCard.firstName + " " + props.artistCard.lastName}</Card.Title>
                 {edit && <UpdateForm artist={props.artistCard} fetchAll={props.fetchAll}/>}
-                <Button onClick={() => setEdit(!edit)} variant="light">Edit</Button>
+                {edit && <Button onClick={() => setEdit(false)} variant="light"> Back </Button>}
+                {!edit && <Button onClick={() => setEdit(true)} variant="light">Edit</Button>}
                 <Button onClick={deleteArtist} variant="light">Delete card</Button>
             </Card.Body>
 
