@@ -1,20 +1,22 @@
-import {useState} from "react";
+import React, {Dispatch, SetStateAction, useState} from "react";
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import {ArtistModel} from "./ArtistModel";
+import {RiArrowGoBackFill} from "react-icons/ri";
+import {GoTrashcan} from "react-icons/go";
 
 type UpdateFormProps = {
+    deleteArtist: () => void,
     artist: ArtistModel,
-    fetchAll: () => void
+    fetchAll: () => void,
+    setEdit: Dispatch<SetStateAction<boolean>>
 }
 
 export default function UpdateForm(props: UpdateFormProps) {
     const [firstName, setfirstName] = useState<String>(props.artist.firstName)
     const [lastName, setlastName] = useState<String>(props.artist.lastName)
-
-
     const updateNewArtist = () => {
         axios.put("/api/artists/" + props.artist.id, {
             firstName: firstName,
@@ -37,6 +39,8 @@ export default function UpdateForm(props: UpdateFormProps) {
                               placeholder={"last name"}/>
             </InputGroup>
             <Button variant="light" type={"submit"} onClick={updateNewArtist}>Save</Button>
+            <Button onClick={() => props.setEdit(false)} variant="light"> <RiArrowGoBackFill/> </Button>
+            <Button onClick={props.deleteArtist} variant="light"><GoTrashcan/></Button>
 
         </div>)
 
