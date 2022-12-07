@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {ArtistModel} from "./ArtistModel";
-import AddArtistForm from "../AddArtistForm";
+import AddArtistForm from "./AddArtistForm";
 import ArtistCard from "./ArtistCard";
 
 export default function AllArtists() {
