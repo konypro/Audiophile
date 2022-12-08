@@ -8,17 +8,19 @@ import java.util.NoSuchElementException;
 @Service
 public class ArtistService {
     private final ArtistRepo artistRepo;
+    private final ArtistUtils artistUtils;
 
     public List<Artist> getArtistList() {
         return this.artistRepo.findAll();
     }
 
-    public ArtistService(ArtistRepo artistRepo) {
+    public ArtistService(ArtistRepo artistRepo, ArtistUtils artistUtils) {
         this.artistRepo = artistRepo;
+        this.artistUtils = artistUtils;
     }
 
     public Artist addNewArtist(Artist newArtist) {
-        String newUUID = ArtistUtils.generateUUID();
+        String newUUID = artistUtils.generateUUID();
         Artist artist = new Artist(newUUID, newArtist.firstName(), newArtist.lastName());
         return this.artistRepo.save(artist);
     }
