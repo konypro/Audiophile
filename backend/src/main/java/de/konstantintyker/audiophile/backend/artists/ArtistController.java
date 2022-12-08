@@ -33,8 +33,9 @@ public class ArtistController {
         try {
             if (artist.id().equals(id)) {
                 return artistService.updateArtistById(id, artist);
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
             }
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         } catch (NoSuchElementException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
