@@ -2,6 +2,7 @@ package de.konstantintyker.audiophile.backend.artist;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.konstantintyker.audiophile.backend.artists.Artist;
+import de.konstantintyker.audiophile.backend.artists.ArtistService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,6 +12,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -19,6 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ArtistIntegrationTest {
     @Autowired
     private MockMvc mvc;
+    @Autowired
+    private ArtistService testService;
+    @Autowired
+    private ObjectMapper objectMapper;
 
 
     @Test
@@ -44,24 +50,45 @@ class ArtistIntegrationTest {
 
     @Test
     @DirtiesContext
-    void deleteTravelerByIdIsSuccessful() throws Exception {
+    void deleteArtistByIdIsNotFound() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.delete("/api/artists/123"))
+                .andExpect(status().isNotFound());
+    }
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        String body = mvc.perform(MockMvcRequestBuilders.post("/api/artists")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {"firstName": "Elton","lastName": "John"}
-                                """))
-                .andExpect(status().isCreated())
-                .andReturn().getResponse().getContentAsString();
-
-        Artist artist = objectMapper.readValue(body, Artist.class);
-
-        mvc
-                .perform(MockMvcRequestBuilders.delete("/api/artists/" + artist.id()))
+    @Test
+    @DirtiesContext
+    void deleteArtistWithExistId() throws Exception {
+        Artist savedArtist = testService.addNewArtist(new Artist("123", "Elton", "John"));
+        String id = savedArtist.id();
+        mvc.perform(MockMvcRequestBuilders.delete("/api/artists/" + id))
                 .andExpect(status().isNoContent());
     }
-}
 
+    @Test
+    @DirtiesContext
+    void updateNewArtist() throws Exception {
+        Artist updateArtist = testService.addNewArtist(new Artist("", "Elton", "John"));
+        Artist newArtist = (new Artist(updateArtist.id(), "Ana", "John"));
+
+        String jsonNewData = """
+                {
+                "id": "$",
+                "firstName": "Ana",
+                "lastName" : "John"
+                }
+                """.replace("$", updateArtist.id());
+
+        String content = mvc.perform(MockMvcRequestBuilders.put("/api/artists/" + updateArtist.id())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(jsonNewData))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        Artist responseArtist = objectMapper.readValue(content, Artist.class);
+
+        assertEquals(newArtist.firstName(), responseArtist.firstName());
+    }
+
+
+}
 
