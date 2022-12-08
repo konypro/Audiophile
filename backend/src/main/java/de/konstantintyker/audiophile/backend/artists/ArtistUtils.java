@@ -1,9 +1,12 @@
 package de.konstantintyker.audiophile.backend.artists;
+import org.springframework.stereotype.Service;
+
 import java.util.UUID;
+
+@Service
 public class ArtistUtils {
-    private ArtistUtils() {
-    }
-    public static String generateUUID() {
+
+    public String generateUUID() {
         return UUID.randomUUID().toString();
     }
 
