@@ -89,6 +89,42 @@ class ArtistIntegrationTest {
         assertEquals(newArtist.firstName(), responseArtist.firstName());
     }
 
+    @Test
+    @DirtiesContext
+    void updateNewArtistNotAllowed() throws Exception {
+        String jsonNewData = """
+                {
+                "id": "$",
+                "firstName": "Ana",
+                "lastName" : "John"
+                }
+                """;
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/artists/123")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(jsonNewData))
+                .andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    @DirtiesContext
+    void updateNewArtistNotFound() throws Exception {
+        String jsonNewData = """
+                {
+                "id": "123",
+                "firstName": "Ana",
+                "lastName" : "John"
+                }
+                """;
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/artists/123")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(jsonNewData))
+                .andExpect(status().isNotFound());
+
+    }
+
 
 }
 
