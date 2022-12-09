@@ -2,7 +2,6 @@ name: Build and analyze backend
 on:
   push:
     branches:
-      - master
   pull_request:
     types: [ opened, synchronize, reopened ]
 jobs:
