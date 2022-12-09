@@ -14,7 +14,7 @@
 	<name>backend</name>
 	<description>backend</description>
 	<properties>
-		<sonar.organization>neuefische</sonar.organization>
+		<sonar.organization>konypro</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<java.version>19</java.version>
 	</properties>
@@ -24,6 +24,7 @@
 			<artifactId>passay</artifactId>
 			<version>1.6.2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
