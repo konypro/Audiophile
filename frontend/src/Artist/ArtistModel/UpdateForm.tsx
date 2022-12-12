@@ -8,6 +8,7 @@ import {RiArrowGoBackFill} from "react-icons/ri";
 import {GoTrashcan} from "react-icons/go";
 
 type UpdateFormProps = {
+
     deleteArtist: () => void,
     artist: ArtistModel,
     fetchAll: () => void,
@@ -17,11 +18,14 @@ type UpdateFormProps = {
 export default function UpdateForm(props: UpdateFormProps) {
     const [firstName, setfirstName] = useState<String>(props.artist.firstName)
     const [lastName, setlastName] = useState<String>(props.artist.lastName)
+    const [url, setUrl] = useState<String>(props.artist.url)
     const updateNewArtist = () => {
         axios.put("/api/artists/" + props.artist.id, {
             firstName: firstName,
             lastName: lastName,
-            id: props.artist.id
+            id: props.artist.id,
+            url: url
+
         })
             .catch((error) => console.log("UPDATE Error: " + error))
             .then(props.fetchAll)
@@ -37,6 +41,11 @@ export default function UpdateForm(props: UpdateFormProps) {
                 <Form.Control aria-label="Small" aria-describedby="inputGroup-sizing-sm" type={"text"}
                               onChange={(event) => setlastName(event.target.value)}
                               placeholder={"last name"}/>
+                <Form.Control aria-label="Small" aria-describedby="inputGroup-sizing-sm" type={"text"}
+                              onChange={(event) => setUrl(event.target.value)}
+                              placeholder={"www.artist.com"}/>
+
+
             </InputGroup>
             <Button variant="light" type={"submit"} onClick={updateNewArtist}>Save</Button>
             <Button onClick={() => props.setEdit(false)} variant="light"> <RiArrowGoBackFill/> </Button>

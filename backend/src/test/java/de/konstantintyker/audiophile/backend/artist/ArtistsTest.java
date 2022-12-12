@@ -18,7 +18,7 @@ class ArtistServiceTest {
 
     @Test
     void GetArtistsTest() {
-        Artist artist = new Artist("123", "Elton", "John");
+        Artist artist = new Artist("123", "Elton", "John", "www.eltonjohn.com");
         List<Artist> artists = List.of(artist);
         when(artistRepo.findAll()).thenReturn(artists);
         List<Artist> actual = artistService.getArtistList();
@@ -27,7 +27,7 @@ class ArtistServiceTest {
 
     @Test
     void AddNewArtistWithId() {
-        Artist artist = new Artist("123", "Elton", "John");
+        Artist artist = new Artist("123", "Elton", "John", "www.eltonjohn.com");
         when(artistRepo.save(artist)).thenReturn(artist);
         when(artistUtils.generateUUID()).thenReturn("123");
 
@@ -40,7 +40,7 @@ class ArtistServiceTest {
     void updateArtistById() {
 
 
-        Artist updatedArtist = new Artist("123", "Elton", "John");
+        Artist updatedArtist = new Artist("123", "Elton", "John", "www.eltonjohn.com");
 
         when(artistRepo.existsById("123")).thenReturn(true);
         when(artistRepo.save(updatedArtist)).thenReturn(updatedArtist);

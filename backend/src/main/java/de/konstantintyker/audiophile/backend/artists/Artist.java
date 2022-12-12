@@ -9,6 +9,7 @@ public record Artist(
         @Id
         String id,
         String firstName,
-        String lastName
+        String lastName,
+        String url
 ) {
 }
