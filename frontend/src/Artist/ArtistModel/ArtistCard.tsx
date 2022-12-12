@@ -7,7 +7,10 @@ import UpdateForm from "./UpdateForm";
 import axios from "axios";
 import {GoTrashcan} from "react-icons/go";
 
-type props = { artistCard: ArtistModel, fetchAll: () => void }
+type props = {
+    artistCard: ArtistModel,
+    fetchAll: () => void,
+}
 
 
 function ArtistCard(props: props) {
@@ -25,19 +28,16 @@ function ArtistCard(props: props) {
                     <Nav.Item>
                         <Nav.Link href="#first">Artist</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link href="#link">Official</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-1">Style</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-2">Spotify</Nav.Link>
-                    </Nav.Item>
                 </Nav>
             </Card.Header>
             <Card.Body>
-                <Card.Title>{props.artistCard.firstName + " " + props.artistCard.lastName}</Card.Title>
+                <Card.Title>
+                    <ul>
+                        <li> {props.artistCard.firstName + "  " + props.artistCard.lastName}</li>
+                        <br/>
+                        <li><a href={props.artistCard.url}> {props.artistCard.url}</a></li>
+                    </ul>
+                </Card.Title>
                 {edit && <UpdateForm artist={props.artistCard} deleteArtist={deleteArtist} setEdit={setEdit}
                                      fetchAll={props.fetchAll}/>}
                 {!edit && <Button onClick={() => setEdit(true)} variant="light">Edit</Button>}

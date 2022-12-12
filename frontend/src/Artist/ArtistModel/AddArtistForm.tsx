@@ -7,6 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import {AiFillFolderAdd} from "react-icons/ai";
 import {FaRegWindowClose} from "react-icons/fa";
 
+
 type AddArtistFormProps = {
     fetchAll: () => void;
 }
@@ -14,14 +15,16 @@ type AddArtistFormProps = {
 export default function AddArtistForm(props: AddArtistFormProps) {
     const [firstName, setFirstName] = useState<String>('')
     const [lastName, setLastName] = useState<String>('')
+    const [url, setUrl] = useState<String>('')
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const addNewArtist = () => {
-        if (firstName === "" || lastName === "") {
+        if (firstName === "" || lastName === "" || url === "") {
             setShowAlert(true)
         } else {
             axios.post("/api/artists", {
                 firstName: firstName,
-                lastName: lastName
+                lastName: lastName,
+                url: url,
             })
                 .catch((error) => console.log("POST Error: " + error))
                 .then(props.fetchAll)
@@ -33,11 +36,14 @@ export default function AddArtistForm(props: AddArtistFormProps) {
 
 
             <InputGroup className="mb-3">
-                <InputGroup.Text>First and Last Name</InputGroup.Text>
+                <InputGroup.Text>First | Last Name | Official Site</InputGroup.Text>
                 <Form.Control type={"text"} onChange={(event) => setFirstName(event.target.value)}
                               placeholder={"Ozzy"}/>
                 <Form.Control type={"text"} onChange={(event) => setLastName(event.target.value)}
                               placeholder={"Osbourne"}/>
+                <Form.Control type={"text"} onChange={(event) => setUrl(event.target.value)}
+                              placeholder={"www.artist.com"}/>
+
 
             </InputGroup>
             <Button size="lg" variant="light" type={"submit"} onClick={addNewArtist}><AiFillFolderAdd/></Button>
@@ -45,14 +51,13 @@ export default function AddArtistForm(props: AddArtistFormProps) {
 
                 <Alert.Heading bsPrefix='alert-heading'>ERROR</Alert.Heading>
 
-                <p>pleas, fill the first and last name </p>
+                <p>pleas, fill the first, last name,URL </p>
                 <Button onClick={() => setShowAlert(false)} variant="light">
                     <FaRegWindowClose/>
                 </Button>
-                <div className="d-flex justify-content-end">
-
-                </div>
+                <div className="d-flex justify-content-end"></div>
             </Alert>
+
 
         </div>)
 
