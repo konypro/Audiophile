@@ -24,15 +24,15 @@ class ArtistServiceTest {
     }
 
     @Test
-    void AddNewArtistWith() {
+    void AddNewArtistWithId() {
         NewArtist artist = new NewArtist("Elton", "John", "www.eltonjohn.com");
-        Artist artist1 = new Artist("123", "elton", "John", "www.sdf.com");
-        when(artistRepo.save(Mockito.any())).thenReturn(artist1);
+        Artist artistWithId = new Artist("123", "Elton", "John", "www.eltonjohn.com");
+        when(artistRepo.save(Mockito.any())).thenReturn(artistWithId);
         when(artistUtils.generateUUID()).thenReturn("123");
 
         Artist result = artistService.addNewArtist(artist);
-        verify(artistRepo).save(artist1);
-        assertEquals(artist1, result);
+        verify(artistRepo).save(artistWithId);
+        assertEquals(artistWithId, result);
     }
 
     @Test
