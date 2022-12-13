@@ -18,7 +18,7 @@ export default function AddArtistForm(props: AddArtistFormProps) {
     const [url, setUrl] = useState<String>('')
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const addNewArtist = () => {
-        if (firstName === "" || lastName === "" || url === "") {
+        if (firstName === "" || url === "") {
             setShowAlert(true)
         } else {
             axios.post("/api/artists", {
