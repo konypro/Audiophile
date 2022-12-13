@@ -3,6 +3,7 @@ package de.konstantintyker.audiophile.backend.artist;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.konstantintyker.audiophile.backend.artists.Artist;
 import de.konstantintyker.audiophile.backend.artists.ArtistService;
+import de.konstantintyker.audiophile.backend.artists.NewArtist;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -58,7 +59,7 @@ class ArtistIntegrationTest {
     @Test
     @DirtiesContext
     void deleteArtistWithExistId() throws Exception {
-        Artist savedArtist = testService.addNewArtist(new Artist("123", "Elton", "John", "www.eltonjohn.com"));
+        Artist savedArtist = testService.addNewArtist(new NewArtist("Elton", "John", "www.eltonjohn.com"));
         String id = savedArtist.id();
         mvc.perform(MockMvcRequestBuilders.delete("/api/artists/" + id))
                 .andExpect(status().isNoContent());
@@ -67,7 +68,7 @@ class ArtistIntegrationTest {
     @Test
     @DirtiesContext
     void updateNewArtist() throws Exception {
-        Artist updateArtist = testService.addNewArtist(new Artist("", "Elton", "John", "www.eltonjohn.com"));
+        Artist updateArtist = testService.addNewArtist(new NewArtist("Elton", "John", "www.eltonjohn.com"));
         Artist newArtist = (new Artist(updateArtist.id(), "Ana", "John", "www.eltonjohn.com"));
 
         String jsonNewData = """
