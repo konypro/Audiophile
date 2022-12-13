@@ -22,7 +22,7 @@ function ArtistCard(props: props) {
 
     }
     return (
-        <Card border="dark" style={{width: '22rem'}}>
+        <Card border="dark" style={{minWidth: '22rem', overflowX: 'auto'}}>
             <Card.Header>Artist</Card.Header>
             <Card.Body>
                 <Card.Title>
