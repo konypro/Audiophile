@@ -24,7 +24,7 @@ public class ArtistController {
     }
 
     @PostMapping
-    public Artist addNewArtist(@Valid @RequestBody Artist artist) {
+    public Artist addNewArtist(@Valid @RequestBody NewArtist artist) {
         return artistService.addNewArtist(artist);
     }
 

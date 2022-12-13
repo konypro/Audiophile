@@ -1,10 +1,8 @@
 package de.konstantintyker.audiophile.backend.artist;
 
-import de.konstantintyker.audiophile.backend.artists.Artist;
-import de.konstantintyker.audiophile.backend.artists.ArtistRepo;
-import de.konstantintyker.audiophile.backend.artists.ArtistService;
-import de.konstantintyker.audiophile.backend.artists.ArtistUtils;
+import de.konstantintyker.audiophile.backend.artists.*;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -26,14 +24,15 @@ class ArtistServiceTest {
     }
 
     @Test
-    void AddNewArtistWithId() {
-        Artist artist = new Artist("123", "Elton", "John", "www.eltonjohn.com");
-        when(artistRepo.save(artist)).thenReturn(artist);
+    void AddNewArtistWith() {
+        NewArtist artist = new NewArtist("Elton", "John", "www.eltonjohn.com");
+        Artist artist1 = new Artist("123", "elton", "John", "www.sdf.com");
+        when(artistRepo.save(Mockito.any())).thenReturn(artist1);
         when(artistUtils.generateUUID()).thenReturn("123");
 
         Artist result = artistService.addNewArtist(artist);
-        verify(artistRepo).save(artist);
-        assertEquals(artist, result);
+        verify(artistRepo).save(artist1);
+        assertEquals(artist1, result);
     }
 
     @Test
