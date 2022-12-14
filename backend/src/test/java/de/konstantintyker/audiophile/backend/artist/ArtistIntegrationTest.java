@@ -56,8 +56,7 @@ class ArtistIntegrationTest {
     @DirtiesContext
     void deleteArtistWithExistId() throws Exception {
         Artist savedArtist = testService.addNewArtist(new NewArtist("Elton", "John", "www.eltonjohn.com"));
-        String id = savedArtist.id();
-        mvc.perform(MockMvcRequestBuilders.delete("/api/artists/" + id))
+        mvc.perform(MockMvcRequestBuilders.delete("/api/artists/" + savedArtist.id()))
                 .andExpect(status().isNoContent());
     }
 
@@ -65,7 +64,6 @@ class ArtistIntegrationTest {
     @DirtiesContext
     void updateNewArtist() throws Exception {
         Artist updateArtist = testService.addNewArtist(new NewArtist("Elton", "John", "www.eltonjohn.com"));
-        //Artist newArtist = (new Artist(updateArtist.id(), "Ana", "John", "www.eltonjohn.com"));
 
         String jsonNewData = """
                 {
